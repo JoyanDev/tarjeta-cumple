@@ -29,7 +29,58 @@ export default function Envelope({ onOpen }) {
 
           {/* Sello Honmoon con la espada en el centro */}
           <div className="relative mt-1 flex h-40 w-40 items-center justify-center">
-            <HonmoonSeal size={160} className="absolute inset-0" />
+            <HonmoonSeal size={160} className="absolute inset-0" 
+            
+            />
+
+            {/* =======================================================
+            FOTO DE JUESLY
+            ======================================================= */}
+            <div
+          className="
+            absolute
+            left-[36%]
+            top-[30px]
+            z-20
+            h-[100px]
+            w-[100px]
+            -translate-x-1/2
+            rounded-full
+            p-[5px]
+          "
+          style={{
+            background:
+              'linear-gradient(135deg, #43E6FF, #FF2E9F, #FFC94D, #43E6FF)',
+            boxShadow:
+              '0 0 18px rgba(67,230,255,0.65), 0 0 40px rgba(255,46,159,0.35)',
+          }}
+        >
+          
+          {/* Borde interior */}
+          <div
+            className="
+              h-full
+              w-full
+              overflow-hidden
+              rounded-full
+              bg-[#170B2E]
+              p-[4px]
+            "
+          >
+
+            <img
+              src="/lucia.png"
+              alt="Juesly"
+              className="
+                h-full
+                w-full
+                rounded-full
+                object-cover
+              "
+            />
+
+          </div>
+        </div>
             <motion.div
               animate={{ rotate: [-8, 8, -8] }}
               transition={{ repeat: Infinity, duration: 2.4, ease: 'easeInOut' }}
@@ -43,14 +94,8 @@ export default function Envelope({ onOpen }) {
             className="mt-1 text-3xl leading-tight text-white"
             style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: 600 }}
           >
-            Fan Meeting VIP
+            Reunión de fans
           </h2>
-          <p
-            className="mt-1 text-xs tracking-[0.25em] text-amber-300"
-            style={{ fontFamily: "'Black Han Sans', sans-serif" }}
-          >
-            생일 축하해
-          </p>
 
           <p className="mt-3 flex items-center justify-center gap-1.5 text-[13px] leading-snug text-white/75">
             <SparkleIcon size={14} className="shrink-0 text-amber-300" />
@@ -63,7 +108,7 @@ export default function Envelope({ onOpen }) {
         onClick={onOpen}
         whileTap={{ scale: 0.94 }}
         whileHover={{ scale: 1.05 }}
-        className="relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-300 px-7 py-3 font-semibold text-[#170B2E] shadow-[0_10px_30px_rgba(67,230,255,0.4)]"
+        className=" cursor-pointer relative overflow-hidden rounded-full bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-300 px-7 py-3 font-semibold text-[#170B2E] shadow-[0_10px_30px_rgba(67,230,255,0.4)]"
       >
         Romper el sello
       </motion.button>
