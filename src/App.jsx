@@ -100,7 +100,7 @@ export default function App() {
       <audio
         ref={audioRef}
         src="/feliz-cumpeaños-kpop.mp3"
-        loop
+        // loop
         preload="auto"
       />
 
