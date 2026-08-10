@@ -13,11 +13,19 @@ import SlashReveal from './components/SlashReveal';
 export default function App() {
   const [opened, setOpened] = useState(false);
   const [showSlash, setShowSlash] = useState(false);
+
   const cardRef = useRef(null);
+  const audioRef = useRef(null);
 
   const handleOpen = () => {
     setShowSlash(true);
     setOpened(true);
+
+    // Inicia la música al abrir la invitación
+    audioRef.current?.play().catch((error) => {
+      console.log('No se pudo reproducir la música:', error);
+    });
+
     setTimeout(() => setShowSlash(false), 650);
   };
 
@@ -43,12 +51,17 @@ export default function App() {
   //   // "roto" (0x0 o el del ícono de imagen caída) y eso hace que se
   //   // vea encimada sobre el texto en el PNG final.
   //   const images = Array.from(cardRef.current.querySelectorAll('img'));
+
   //   await Promise.all(
   //     images.map((img) => {
-  //       if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+  //       if (img.complete && img.naturalWidth > 0) {
+  //         return Promise.resolve();
+  //       }
+
   //       if (typeof img.decode === 'function') {
   //         return img.decode().catch(() => {});
   //       }
+
   //       return new Promise((resolve) => {
   //         img.addEventListener('load', resolve, { once: true });
   //         img.addEventListener('error', resolve, { once: true });
@@ -79,15 +92,32 @@ export default function App() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0618]">
+
+      {/* =========================================================
+          MÚSICA DE FONDO
+          ========================================================= */}
+
+      <audio
+        ref={audioRef}
+        src="/feliz-cumpeaños-kpop.mp3"
+        loop
+        preload="auto"
+      />
+
       <FloatingEmblems />
       <Sparkles />
       <SpotlightBeams />
 
-      <AnimatePresence>{showSlash && <SlashReveal />}</AnimatePresence>
+      <AnimatePresence>
+        {showSlash && <SlashReveal />}
+      </AnimatePresence>
 
       <div className="relative z-10 flex min-h-screen items-center justify-center p-6">
+
         <AnimatePresence mode="wait">
+
           {!opened ? (
+
             <motion.div
               key="envelope"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -97,29 +127,59 @@ export default function App() {
             >
               <Envelope onOpen={handleOpen} />
             </motion.div>
+
           ) : (
+
             <motion.div
               key="card"
               initial={{ opacity: 0, y: 60, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}
+              transition={{
+                duration: 0.7,
+                ease: 'easeOut',
+                delay: 0.15,
+              }}
               className="flex flex-col items-center gap-6"
             >
+
               <InvitationCard ref={cardRef} />
+
+              {/* =====================================================
+                  BOTÓN DESCARGAR
+                  ===================================================== */}
 
               {/* <motion.button
                 onClick={downloadCard}
                 whileTap={{ scale: 0.95 }}
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-300 px-6 py-3 font-semibold text-[#170B2E] shadow-[0_10px_30px_rgba(67,230,255,0.4)]"
+                className="
+                  flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  bg-gradient-to-r
+                  from-cyan-400
+                  via-fuchsia-500
+                  to-amber-300
+                  px-6
+                  py-3
+                  font-semibold
+                  text-[#170B2E]
+                  shadow-[0_10px_30px_rgba(67,230,255,0.4)]
+                "
               >
                 <Download size={18} />
                 Descargar invitación
               </motion.button> */}
+
             </motion.div>
+
           )}
+
         </AnimatePresence>
+
       </div>
+
     </main>
   );
 }
