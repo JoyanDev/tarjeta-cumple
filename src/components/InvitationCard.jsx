@@ -29,7 +29,7 @@ const InvitationCard = forwardRef((props, ref) => {
           PERSONAJES + FOTO
           ========================================================= */}
 
-      <div className="pointer-events-none absolute left-1/2 top-0 z-30 h-[245px] w-full -translate-x-1/2">
+      <div className="pointer-events-none absolute left-0 top-0 z-30 h-[245px] w-full">
 
         {/* =======================================================
             HONMOON - DETRÁS DE LA FOTO
@@ -41,7 +41,7 @@ const InvitationCard = forwardRef((props, ref) => {
             absolute
             left-[31%]
             top-[-35px]
-            -translate-x-1/2
+            -ml-[102.5px]
           "
         />
 
@@ -57,7 +57,7 @@ const InvitationCard = forwardRef((props, ref) => {
             z-20
             h-[120px]
             w-[120px]
-            -translate-x-1/2
+            -ml-[60px]
             rounded-full
             p-[5px]
           "
@@ -401,7 +401,6 @@ const InvitationCard = forwardRef((props, ref) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
-                    export-hide
                     mt-2.5
                     flex
                     items-center
@@ -437,7 +436,7 @@ const InvitationCard = forwardRef((props, ref) => {
               CUENTA REGRESIVA
               ===================================================== */}
 
-          <div className="export-hide relative mt-5">
+          <div className="relative mt-5">
             <CountdownTimer />
           </div>
 

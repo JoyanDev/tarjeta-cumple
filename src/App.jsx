@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download } from 'lucide-react';
-import { toPng } from 'html-to-image';
+// import { Download } from 'lucide-react';
+// import { toPng } from 'html-to-image';
 
 import Envelope from './components/Envelope';
 import InvitationCard from './components/InvitationCard';
@@ -21,38 +21,61 @@ export default function App() {
     setTimeout(() => setShowSlash(false), 650);
   };
 
-  const downloadCard = async () => {
-    if (!cardRef.current) return;
+  // const downloadCard = async () => {
+  //   if (!cardRef.current) return;
 
-    // Selecciona todos los elementos que no queremos exportar
-    const hiddenElements = cardRef.current.querySelectorAll('.export-hide');
+  //   // Selecciona todos los elementos que no queremos exportar
+  //   // (por ahora, ninguno dentro de la tarjeta lleva esta clase;
+  //   // el botón de descargar ya vive FUERA de cardRef, así que
+  //   // nunca forma parte de la captura)
+  //   const hiddenElements = cardRef.current.querySelectorAll('.export-hide');
 
-    // Los ocultamos para que el layout se reacomode
-    hiddenElements.forEach((el) => {
-      el.dataset.prevDisplay = el.style.display;
-      el.style.display = 'none';
-    });
+  //   // Los ocultamos para que el layout se reacomode
+  //   hiddenElements.forEach((el) => {
+  //     el.dataset.prevDisplay = el.style.display;
+  //     el.style.display = 'none';
+  //   });
 
-    // Esperamos un frame para que el navegador recalcule el diseño
-    await new Promise((resolve) => requestAnimationFrame(resolve));
+  //   // Nos aseguramos de que las fotos (Rumi y la cumpleañera) estén
+  //   // completamente cargadas y decodificadas antes de capturar.
+  //   // Si html-to-image dispara la captura mientras una imagen aún
+  //   // está en proceso de carga, la termina dibujando con su tamaño
+  //   // "roto" (0x0 o el del ícono de imagen caída) y eso hace que se
+  //   // vea encimada sobre el texto en el PNG final.
+  //   const images = Array.from(cardRef.current.querySelectorAll('img'));
+  //   await Promise.all(
+  //     images.map((img) => {
+  //       if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+  //       if (typeof img.decode === 'function') {
+  //         return img.decode().catch(() => {});
+  //       }
+  //       return new Promise((resolve) => {
+  //         img.addEventListener('load', resolve, { once: true });
+  //         img.addEventListener('error', resolve, { once: true });
+  //       });
+  //     })
+  //   );
 
-    try {
-      const dataUrl = await toPng(cardRef.current, {
-        pixelRatio: 3,
-        cacheBust: true,
-      });
+  //   // Esperamos un frame para que el navegador recalcule el diseño
+  //   await new Promise((resolve) => requestAnimationFrame(resolve));
 
-      const link = document.createElement('a');
-      link.download = 'invitacion-juesly.png';
-      link.href = dataUrl;
-      link.click();
-    } finally {
-      // Restauramos los elementos
-      hiddenElements.forEach((el) => {
-        el.style.display = el.dataset.prevDisplay || '';
-      });
-    }
-  };
+  //   try {
+  //     const dataUrl = await toPng(cardRef.current, {
+  //       pixelRatio: 3,
+  //       cacheBust: true,
+  //     });
+
+  //     const link = document.createElement('a');
+  //     link.download = 'invitacion-juesly.png';
+  //     link.href = dataUrl;
+  //     link.click();
+  //   } finally {
+  //     // Restauramos los elementos
+  //     hiddenElements.forEach((el) => {
+  //       el.style.display = el.dataset.prevDisplay || '';
+  //     });
+  //   }
+  // };
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0618]">
@@ -84,7 +107,7 @@ export default function App() {
             >
               <InvitationCard ref={cardRef} />
 
-              <motion.button
+              {/* <motion.button
                 onClick={downloadCard}
                 whileTap={{ scale: 0.95 }}
                 whileHover={{ scale: 1.05 }}
@@ -92,7 +115,7 @@ export default function App() {
               >
                 <Download size={18} />
                 Descargar invitación
-              </motion.button>
+              </motion.button> */}
             </motion.div>
           )}
         </AnimatePresence>
