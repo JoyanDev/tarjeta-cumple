@@ -82,8 +82,13 @@ const InvitationCard = forwardRef((props, ref) => {
           >
 
             <img
-              src="/lucia.png"
+              src="/lucia.webp"
               alt="Juesly"
+              width="120"
+              height="120"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="
                 h-full
                 w-full
@@ -112,8 +117,12 @@ const InvitationCard = forwardRef((props, ref) => {
         >
 
           <img
-            src="/rumi.png"
+            src="/rumi.webp"
             alt="Rumi, la guerrera k-pop favorita de Juesly"
+            width="190"
+            height="255"
+            loading="eager"
+            decoding="async"
             className="
               h-full
               w-auto
